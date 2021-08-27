@@ -10,15 +10,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Transacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotBlank
-    private String transacaoId;
+    private String codigoTransacao;
     @NotNull @Positive
     private BigDecimal valor;
-    @NotNull @ManyToOne(cascade = {CascadeType.PERSIST})
+    @NotNull @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Estabelecimento estabelecimento;
-    @NotNull @ManyToOne(cascade = {CascadeType.PERSIST})
+    @NotNull @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Cartao cartao;
     @NotNull
     private LocalDateTime efetivadaEm;
@@ -26,8 +23,20 @@ public class Transacao {
     @Deprecated
     public Transacao(){}
 
-    public Transacao(String transacaoId, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDateTime efetivadaEm) {
-        this.transacaoId = transacaoId;
+    public String getCodigoTransacao() {
+        return codigoTransacao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public LocalDateTime getEfetivadaEm() {
+        return efetivadaEm;
+    }
+
+    public Transacao(String codigoTransacao, BigDecimal valor, Estabelecimento estabelecimento, Cartao cartao, LocalDateTime efetivadaEm) {
+        this.codigoTransacao = codigoTransacao;
         this.valor = valor;
         this.estabelecimento = estabelecimento;
         this.cartao = cartao;

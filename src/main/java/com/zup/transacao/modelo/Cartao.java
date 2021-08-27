@@ -9,18 +9,15 @@ import java.util.List;
 @Entity
 public class Cartao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NotBlank
-    private String cartaoId;
+    private String codigoCartao;
     @NotBlank @Email
     private String email;
 
     @Deprecated
     public Cartao(){}
 
-    public Cartao(String cartaoId, String email) {
-        this.cartaoId = cartaoId;
+    public Cartao(String codigoCartao, String email) {
+        this.codigoCartao = codigoCartao;
         this.email = email;
     }
 }
